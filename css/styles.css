@@ -2,14 +2,16 @@ body {
     background-color: hsl(235, 21%, 11%);
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
 }
 
 .header {
+    align-self: stretch;
     background-image: url(/img/bg-mobile-dark.jpg);
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     height: 30vh;
 }
@@ -17,10 +19,10 @@ body {
 .main {
     position: absolute;
     top: 0;
-    left: 0;
-    height: 100%;
     width: 100%;
-    padding: 3rem 1.5rem;
+    max-width: 550px;
+    min-width: 350px;
+    padding: 3rem 1.5rem 1rem;
     background-color: transparent;
     box-sizing: border-box;
 }
@@ -39,9 +41,7 @@ body {
     margin: 0;
 }
 
-.article {
-    padding-top: 1.7rem;
-}
+.article {padding-top: 1.7rem;}
 
 .box-top{
     display: flex;
@@ -50,7 +50,7 @@ body {
     padding: 1rem 0;
 }
 
-.box-top, .box-bottom, .filter-options {
+.box-top {
     background-color: hsl(235, 24%, 19%);
     border-radius: 5px;
 }
@@ -74,7 +74,11 @@ body {
     color: hsl(234, 39%, 85%);
 }
 
-.box-bottom {padding-top: 5px;}
+.box-bottom {
+    position: relative;
+    padding-top: 5px;
+    border-radius: 5px;
+}
 
 .list-todo {
     list-style-type: none;
@@ -91,6 +95,7 @@ body {
     margin-bottom: 0;
     padding: 1rem 0;
     border-bottom: 1px solid hsl(237, 14%, 26%);
+    background-color: hsl(235, 24%, 19%);
 }
 
 .todo-circle {
@@ -114,44 +119,41 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
     padding: 1rem;
     color: hsl(233, 14%, 35%);
     font-weight: 400;
+    background-color: hsl(235, 24%, 19%);
 }
 
 .options p {margin: 0;}
 
-.filter-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
+.filter {
     display: flex;
     justify-content: space-evenly;
-    font-size: 16px;
     font-weight: 700;
     margin-top: 15px;
     padding: 1rem;
-    box-sizing: border-box;
+    color: hsl(233, 14%, 35%);
+    background-color: hsl(235, 24%, 19%);
 }
 
-.option-filter-selected {
+.filter-selected {
     color: hsl(220, 98%, 61%);
 }
 
 .main-tip {
     position: relative;
-    margin-top: 7rem;
+    margin-top: 2.5rem;
     text-align: center;
     color: hsl(233, 14%, 35%);
     font-weight: 700;
 }
 
-.footer {
-    position: relative;
-    margin-top: auto;
-    z-index: 100;
+/* .footer {
+    position: absolute;
+    top: 100%;
+    margin-top: 40px;
 }
 
 .footer p {
@@ -163,4 +165,29 @@ body {
 
 .footer p a {
     color: hsl(233, 14%, 35%);
+} */
+
+@media screen and (min-width: 500px) {
+    .header {
+        background-image: url(/img/bg-desktop-dark.jpg);
+    }
+
+    .main {
+        top: 30px;
+    }
+
+    .main-header h1 {
+        font-size: 36px;
+        letter-spacing: 11px;
+    }
+
+    .filter {
+        gap: 15px;
+        position: absolute;
+        left: calc(50% - 90px);
+        bottom: 0;
+        padding: .9rem;
+        margin: 0;
+        font-size: 13px;
+    }
 }
