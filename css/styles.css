@@ -1,5 +1,25 @@
+/* :root {
+    --body:  hsl(235, 21%, 11%);
+    --box-item: hsl(235, 24%, 19%);
+    --border: hsl(237, 14%, 26%);
+    --text: hsl(234, 39%, 85%);
+    --text2: hsl(233, 14%, 35%);
+    --hover:  hsl(236, 33%, 92%);
+    --shadow:  hsl(233, 18%, 10%);
+} */
+
+:root {
+    --body:  hsl(0, 0%, 98%);
+    --box-item: hsl(0, 0%, 98%);
+    --border: hsl(236, 33%, 92%);
+    --text: hsl(236, 9%, 61%);
+    --text2: hsl(236, 9%, 61%);
+    --hover:  hsl(235, 19%, 35%);
+    --shadow: hsl(236, 33%, 92%);
+}
+
 body {
-    background-color: hsl(235, 21%, 11%);
+    background-color: var(--body);
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     min-height: 100vh;
@@ -10,7 +30,8 @@ body {
 
 .header {
     align-self: stretch;
-    background-image: url(/img/bg-mobile-dark.jpg);
+    background-image: url(/img/bg-mobile-light.jpg);
+    /* background-image: url(/img/bg-mobile-dark.jpg); */
     background-size: 100% 100%;
     background-repeat: no-repeat;
     height: 30vh;
@@ -48,10 +69,7 @@ body {
     gap: 15px;
     margin-bottom: 15px;
     padding: 1rem 0;
-}
-
-.box-top {
-    background-color: hsl(235, 24%, 19%);
+    background-color: var(--box-item);
     border-radius: 5px;
 }
 
@@ -61,7 +79,7 @@ body {
 }
 
 .box-circle, .todo-circle {
-    border: 2px solid hsl(237, 14%, 26%);
+    border: 2px solid var(--border);
     border-radius: 50%;
     margin-left: 1rem;
 }
@@ -71,7 +89,7 @@ body {
     border: none;
     background-color: transparent;
     font-weight: 400;
-    color: hsl(234, 39%, 85%);
+    color: var(--text);
 }
 
 .box-bottom {
@@ -94,8 +112,8 @@ body {
     gap: 17px;
     margin-bottom: 0;
     padding: 1rem 0;
-    border-bottom: 1px solid hsl(237, 14%, 26%);
-    background-color: hsl(235, 24%, 19%);
+    border-bottom: 1px solid var(--border);
+    background-color:var(--box-item);
 }
 
 .todo-circle {
@@ -109,9 +127,10 @@ body {
 }
 
 .todo-text {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
     margin: 0;
-    color: hsl(234, 39%, 85%);
+    color: var(--text);
 }
 
 .options {
@@ -121,9 +140,9 @@ body {
     align-items: center;
     font-size: 13px;
     padding: 1rem;
-    color: hsl(233, 14%, 35%);
+    color: var(--text2);
     font-weight: 400;
-    background-color: hsl(235, 24%, 19%);
+    background-color:var(--box-item);
 }
 
 .options p {margin: 0;}
@@ -134,19 +153,20 @@ body {
     font-weight: 700;
     margin-top: 15px;
     padding: 1rem;
-    color: hsl(233, 14%, 35%);
-    background-color: hsl(235, 24%, 19%);
+    color: var(--text2);
+    background-color:var(--box-item);
 }
 
 .filter-selected {
-    color: hsl(220, 98%, 61%);
+    color: hsl(220, 98%, 61%); /* cambiar con JS */
 }
 
 .main-tip {
     position: relative;
     margin-top: 2.5rem;
     text-align: center;
-    color: hsl(233, 14%, 35%);
+    color: var(--text2);
+    font-size: 14px;
     font-weight: 700;
 }
 
@@ -164,12 +184,13 @@ body {
 }
 
 .footer p a {
-    color: hsl(233, 14%, 35%);
+    color: var(--text2);
 } */
 
 @media screen and (min-width: 500px) {
     .header {
-        background-image: url(/img/bg-desktop-dark.jpg);
+        background-image: url(/img/bg-desktop-light.jpg);
+        /* background-image: url(/img/bg-desktop-dark.jpg); */
     }
 
     .main {
@@ -181,6 +202,28 @@ body {
         letter-spacing: 11px;
     }
 
+    .box-bottom {
+        box-shadow: 0px 35px 25px -20px var(--shadow);
+    }
+
+    .todo-img {
+        visibility: hidden;
+    }
+
+    .todo-item {
+        cursor: pointer;
+    }
+
+    .todo-item:hover .todo-img {
+        width: 18px;
+        visibility: visible;
+    }
+
+    .todo-circle:hover {
+        background: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+        cursor: pointer;
+    }
+
     .filter {
         gap: 15px;
         position: absolute;
@@ -189,5 +232,15 @@ body {
         padding: .9rem;
         margin: 0;
         font-size: 13px;
+    }
+
+    .filter-hover:hover {
+        color: var(--hover);  /* cambiar con JS */
+        cursor: pointer;
+    }
+    
+    .options p:hover, .options div:hover {
+        color: var(--hover);
+        cursor: pointer;
     }
 }
