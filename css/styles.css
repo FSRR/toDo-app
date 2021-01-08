@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --body:  hsl(235, 21%, 11%);
     --box-item: hsl(235, 24%, 19%);
     --border: hsl(237, 14%, 26%);
@@ -6,9 +6,9 @@
     --text2: hsl(233, 14%, 35%);
     --hover:  hsl(236, 33%, 92%);
     --shadow:  hsl(233, 18%, 10%);
-}
+} */
 
-/* :root {
+:root {
     --body:  hsl(0, 0%, 98%);
     --box-item: hsl(0, 0%, 98%);
     --border: hsl(236, 33%, 92%);
@@ -16,7 +16,7 @@
     --text2: hsl(236, 9%, 61%);
     --hover:  hsl(235, 19%, 35%);
     --shadow: hsl(236, 33%, 92%);
-} */
+}
 
 body {
     background-color: var(--body);
@@ -104,6 +104,10 @@ body {
     padding-left: 0;
     margin-top: 0;
     margin-bottom: 0;
+    min-height: 380px;
+    max-height: 400px;
+    background-color: var(--box-item);
+    overflow-y: auto;
 }
 
 .todo-item {
@@ -114,7 +118,7 @@ body {
     margin-bottom: 0;
     padding: 1rem 0;
     border-bottom: 1px solid var(--border);
-    background-color:var(--box-item);
+    background-color: var(--box-item);
 }
 
 .todo-circle {
@@ -224,6 +228,10 @@ body {
 
     .box-bottom {
         box-shadow: 0px 35px 25px -20px var(--shadow);
+    }
+
+    .list-todo {
+        max-height: 500px;
     }
 
     .todo-img {
