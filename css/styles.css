@@ -1,4 +1,4 @@
-/* :root {
+:root {
     --body:  hsl(235, 21%, 11%);
     --box-item: hsl(235, 24%, 19%);
     --border: hsl(237, 14%, 26%);
@@ -6,9 +6,9 @@
     --text2: hsl(233, 14%, 35%);
     --hover:  hsl(236, 33%, 92%);
     --shadow:  hsl(233, 18%, 10%);
-} */
+}
 
-:root {
+/* :root {
     --body:  hsl(0, 0%, 98%);
     --box-item: hsl(0, 0%, 98%);
     --border: hsl(236, 33%, 92%);
@@ -16,7 +16,7 @@
     --text2: hsl(236, 9%, 61%);
     --hover:  hsl(235, 19%, 35%);
     --shadow: hsl(236, 33%, 92%);
-}
+} */
 
 body {
     background-color: var(--body);
@@ -74,12 +74,12 @@ body {
 }
 
 .box-circle {
-    width: 27px;
+    width: 24px;
     height: 20px;
 }
 
 .box-circle, .todo-circle {
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     border-radius: 50%;
     margin-left: 1rem;
 }
@@ -88,7 +88,8 @@ body {
     width: 100%;
     border: none;
     background-color: transparent;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 700;
     color: var(--text);
 }
 
@@ -133,6 +134,27 @@ body {
     color: var(--text);
 }
 
+.todo-completed:first-child { /* añadir con JS */
+    position: relative;
+    background-image: url(/img/icon-check.svg), linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    background-repeat: no-repeat;
+    background-size: 10px 10px, 100% 100%;
+    background-position: center, 0 0;
+}
+
+.todo-completed::before:first-child { /* añadir con JS */
+    position: absolute;
+    top: 0; left: 0;
+    content: "";
+    background-image: url(/img/icon-check.svg);
+    background-size: 100% 100%;
+}
+
+.todo-completed:nth-child(2) {
+    color: var(--text2);
+    text-decoration: line-through;
+}
+
 .options {
     position: relative; 
     display: flex;
@@ -158,34 +180,32 @@ body {
 }
 
 .filter-selected {
-    color: hsl(220, 98%, 61%); /* cambiar con JS */
+    color: hsl(220, 98%, 61%); /* añadir con JS */
 }
 
 .main-tip {
     position: relative;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
     text-align: center;
     color: var(--text2);
     font-size: 14px;
     font-weight: 700;
 }
 
-/* .footer {
-    position: absolute;
-    top: 100%;
-    margin-top: 40px;
+.footer {
+    margin-top: 2rem;
 }
 
 .footer p {
     font-size: 12px;
     font-weight: 700;
     text-align: center;
-    color: #fff;
+    color: var(--text);
 }
 
 .footer p a {
     color: var(--text2);
-} */
+}
 
 @media screen and (min-width: 500px) {
     .header {
@@ -220,7 +240,7 @@ body {
     }
 
     .todo-circle:hover {
-        background: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+        border-image: linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) 1 1 space;
         cursor: pointer;
     }
 
@@ -235,7 +255,7 @@ body {
     }
 
     .filter-hover:hover {
-        color: var(--hover);  /* cambiar con JS */
+        color: var(--hover);  /* añadir con JS */
         cursor: pointer;
     }
     
