@@ -121,6 +121,10 @@ body {
     background-color: var(--box-item);
 }
 
+.todo-hide-item {
+    display: none;
+}
+
 .todo-circle {
     width: 20px;
     height: 20px;
@@ -144,14 +148,6 @@ body {
     background-repeat: no-repeat;
     background-size: 10px 10px, 100% 100%;
     background-position: center, 0 0;
-}
-
-.todo-completed::before:first-child { /* añadir con JS */
-    position: absolute;
-    top: 0; left: 0;
-    content: "";
-    background-image: url(/img/icon-check.svg);
-    background-size: 100% 100%;
 }
 
 .todo-completed:nth-child(2) {
@@ -235,16 +231,13 @@ body {
     }
 
     .todo-img {
+        width: 18px;
         visibility: hidden;
     }
-
-    .todo-item {
-        cursor: pointer;
-    }
-
+    
     .todo-item:hover .todo-img {
-        width: 18px;
         visibility: visible;
+        cursor: pointer;
     }
 
     .todo-circle:hover {
