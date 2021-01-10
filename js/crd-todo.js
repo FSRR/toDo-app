@@ -30,15 +30,19 @@ if(newTodo) {
 
                 listToDo.prepend(toDo)
 
+                itemsLeft()
+
                 if(toDoCircle){
                     toDoCircle.addEventListener('click', () => {
                         completedToDo(toDoCircle)
+                        itemsLeft()
                     })
                 }
                 
                 if(toDoImg){
                     toDoImg.addEventListener('click', () => {
                         deleteToDo(toDoImg)
+                        itemsLeft()
                     })
                 }
 
@@ -69,17 +73,30 @@ const filter = document.getElementById('filter')
 
 if(filter) {
     filter.addEventListener('click', e => {
-        if(e.target == filter.children[0]) filters('all', e.target)
-        else if(e.target == filter.children[1]) filters('active', e.target)
-        else if(e.target == filter.children[2]) filters('completed', e.target)
+        if(e.target == filter.children[0]) filters(e.target)
+        else if(e.target == filter.children[1]) filters(e.target)
+        else if(e.target == filter.children[2]) filters(e.target)
     })
 }
 
 
-const filters = (type, target) => {
-    Array.from(listToDo.children).filter(item => item.getAttribute(`data-${type}`)).map(item => item.classList.remove('todo-hide-item'))
-    Array.from(listToDo.children).filter(item => !item.getAttribute(`data-${type}`)).map(item => item.classList.add('todo-hide-item'))
+const filters = (target) => {
+    Array.from(listToDo.children).filter(item => item.getAttribute(`data-${target.getAttribute('data-status')}`)).map(item => item.classList.remove('todo-hide-item'))
+    Array.from(listToDo.children).filter(item => !item.getAttribute(`data-${target.getAttribute('data-status')}`)).map(item => item.classList.add('todo-hide-item'))
 
     Array.from(filter.children).find(item => item.classList.item(0) == 'filter-selected').classList.replace('filter-selected', 'filter-hover')
     target.classList.replace('filter-hover', 'filter-selected')
+}
+
+const cleanCompleted = document.getElementById('clean-completed')
+
+if(cleanCompleted) {
+    cleanCompleted.addEventListener('click', () => {
+        Array.from(listToDo.children).filter(item => item.getAttribute('data-completed')).map(item => listToDo.removeChild(item))
+    })
+}
+
+const itemsLeft = () => {
+    const itemLeft = Array.from(listToDo.children).filter(item => item.getAttribute('data-active')).length
+    document.getElementById('items-left').textContent = `${itemLeft} items left`
 }

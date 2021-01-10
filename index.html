@@ -10,13 +10,12 @@
     <title>Todo-App</title>
 </head>
 
-<body>
-    <header class="header"></header>
+<body class="dark" id="body">
+    <header class="header header-dark" id="header-background"></header>
     <main class="main">
         <header class="main-header">
             <h1>todo</h1>
-            <!-- <img src="img/icon-sun.svg" alt="Light Theme"> -->
-            <img src="img/icon-moon.svg" alt="Light Theme">
+            <img src="img/icon-sun.svg" alt="Light Theme" id="theme-mode">
         </header>
         <article class="article">
             <div class="box-top">
@@ -25,7 +24,7 @@
             </div>
             <div class="box-bottom">
                 <ul class="list-todo" id="list-todo">
-                    <!-- <li class="todo-item">
+                    <!-- <li class="todo-item" data-status="all, active">
                         <div class="todo-circle  todo-completed"></div>
                         <p class="todo-text  todo-completed">Estudiar Js</p>
                         <img src="img/icon-cross.svg" alt="Drop item" class="todo-img">
@@ -57,13 +56,13 @@
                     </li> -->
                 </ul>
                 <div class="options">
-                    <p>5 items left</p>
-                    <div id="clear-todo-completed">Clear Completed</div>
+                    <p id="items-left">0 items left</p>
+                    <div id="clean-completed">Clear Completed</div>
                 </div>
                 <div class="filter" id="filter">
-                    <div class="filter-selected">All</div>
-                    <div class="filter-hover">Active</div>
-                    <div class="filter-hover">Completed</div>
+                    <div class="filter-selected" data-status="all">All</div>
+                    <div class="filter-hover" data-status="active">Active</div>
+                    <div class="filter-hover" data-status="completed">Completed</div>
                 </div>
             </div>
         </article>
@@ -77,6 +76,7 @@
     </main>
 
     <script src="js/crd-todo.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 
 </html>
