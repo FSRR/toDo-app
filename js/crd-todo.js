@@ -1,9 +1,10 @@
 const newTodo = document.getElementById('new-todo')
 const listToDo = document.getElementById('list-todo')
+let id = 0
 
 if(newTodo) {
     newTodo.addEventListener('keyup', e => {
-        if(newTodo.value) {
+        if(newTodo.value.trim().length > 0) {
             if(e.key == 'Enter') {
                 const toDo = document.createElement('li')
                 const toDoCircle = document.createElement('div')
@@ -15,7 +16,9 @@ if(newTodo) {
                 toDo.classList.add('todo-item')
                 toDo.setAttribute('data-all', 'all')
                 toDo.setAttribute('data-active', 'active')
-
+                toDo.setAttribute('draggable', true)
+                toDo.setAttribute('id', `item-${id}`)
+                
                 toDoCircle.classList.add('todo-circle')
                 
                 toDoText.classList.add('todo-text')
@@ -46,7 +49,34 @@ if(newTodo) {
                     })
                 }
 
+                if(toDo) {
+                    toDo.addEventListener('dragstart', e => {
+                        e.dataTransfer.setData('text/plain', e.target.id)
+                        e.target.classList.add('drag-over')
+                    })
+                    toDo.addEventListener('dragenter', e => {
+                        e.preventDefault()
+                        const element = document.getElementById(e.dataTransfer.getData('text'))
+                        let indexTarget
+                        const indexElement = Array.from(listToDo.children).findIndex(item => item == element)
+                        if(e.target != toDo) {
+                            indexTarget = Array.from(listToDo.children).findIndex(item => item == e.target.parentElement)
+                        } else {
+                            indexTarget = Array.from(listToDo.children).findIndex(item => item == e.target)
+                        }
+                        if(indexElement > indexTarget) listToDo.children[indexTarget].before(element)
+                        else listToDo.children[indexTarget].after(element)
+                    })
+                    toDo.addEventListener('dragover', e => e.preventDefault())
+                    toDo.addEventListener('drop', e => {
+                        e.preventDefault()
+                        if(e.target != toDo) e.target.parentNode.classList.remove('drag-over')
+                        else e.target.classList.remove('drag-over')
+                    })
+                }
+
                 newTodo.value = ''
+                id++
             }
         }
     })
@@ -56,7 +86,7 @@ const completedToDo = (item) => {
     item.classList.toggle('todo-completed')
     item.nextElementSibling.classList.toggle('todo-completed')
 
-    if(item.parentElement.getAttribute('data-completed')) {
+    if(item.parentElement.dataset.completed) {
         item.parentElement.removeAttribute('data-completed')
         item.parentElement.setAttribute('data-active', 'active')
     } else {
@@ -81,8 +111,8 @@ if(filter) {
 
 
 const filters = (target) => {
-    Array.from(listToDo.children).filter(item => item.getAttribute(`data-${target.getAttribute('data-status')}`)).map(item => item.classList.remove('todo-hide-item'))
-    Array.from(listToDo.children).filter(item => !item.getAttribute(`data-${target.getAttribute('data-status')}`)).map(item => item.classList.add('todo-hide-item'))
+    Array.from(listToDo.children).filter(item => item.dataset[target.dataset.status]).map(item => item.classList.remove('todo-hide-item'))
+    Array.from(listToDo.children).filter(item => !item.dataset[target.dataset.status]).map(item => item.classList.add('todo-hide-item'))
 
     Array.from(filter.children).find(item => item.classList.item(0) == 'filter-selected').classList.replace('filter-selected', 'filter-hover')
     target.classList.replace('filter-hover', 'filter-selected')
@@ -92,11 +122,13 @@ const cleanCompleted = document.getElementById('clean-completed')
 
 if(cleanCompleted) {
     cleanCompleted.addEventListener('click', () => {
-        Array.from(listToDo.children).filter(item => item.getAttribute('data-completed')).map(item => listToDo.removeChild(item))
+        Array.from(listToDo.children).filter(item => item.dataset.completed).map(item => listToDo.removeChild(item))
     })
 }
 
 const itemsLeft = () => {
-    const itemLeft = Array.from(listToDo.children).filter(item => item.getAttribute('data-active')).length
+    const itemLeft = Array.from(listToDo.children).filter(item => item.dataset.active).length
     document.getElementById('items-left').textContent = `${itemLeft} items left`
 }
+
+addEventListener('touchstart', console.log('hola'))

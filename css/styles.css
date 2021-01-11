@@ -1,10 +1,11 @@
 /* body, header, main, article, footer, ul {
-    transition: all .1s ease-out;
+    transition: all .1s ease-out; 
 } */
 
 .dark {
     --body:  hsl(235, 21%, 11%);
     --box-item: hsl(235, 24%, 19%);
+    --drag-item: hsl(236, 21%, 14%);
     --border: hsl(237, 14%, 26%);
     --text: hsl(234, 39%, 85%);
     --text2: hsl(233, 14%, 35%);
@@ -15,6 +16,7 @@
 .light {
     --body:  hsl(0, 0%, 98%);
     --box-item: hsl(0, 0%, 98%);
+    --drag-item:hsl(0, 1%, 79%);
     --border: hsl(236, 33%, 92%);
     --text: hsl(236, 9%, 61%);
     --text2: hsl(236, 9%, 61%);
@@ -101,7 +103,6 @@ body {
     font-size: 16px;
     font-weight: 700;
     color: var(--text);
-    transition: color 1s ease-out;
 }
 
 .box-bottom {
@@ -119,7 +120,6 @@ body {
     max-height: 400px;
     background-color: var(--box-item);
     overflow-y: auto;
-    transition: background-color 1s ease-out;
 }
 
 .todo-item {
@@ -131,12 +131,12 @@ body {
     padding: 1rem 0;
     border-bottom: 1px solid var(--border);
     background-color: var(--box-item);
-    transition: background-color, border-bottom 1s ease-out;
+    box-sizing: border-box;
 }
 
-.todo-hide-item {
-    display: none;
-}
+.drag-over {background-color: var(--drag-item);}
+
+.todo-hide-item {display: none;}
 
 .todo-circle {
     width: 20px;
@@ -153,7 +153,6 @@ body {
     font-weight: 700;
     margin: 0;
     color: var(--text);
-    transition: color 1s ease-out;
 }
 
 .todo-completed:first-child {
@@ -179,7 +178,6 @@ body {
     color: var(--text2);
     font-weight: 400;
     background-color:var(--box-item);
-    transition: background-color, color 1s ease-out;
 }
 
 .options p {margin: 0;}
@@ -192,12 +190,9 @@ body {
     padding: 1rem;
     color: var(--text2);
     background-color:var(--box-item);
-    transition: background-color, color 1s ease-out;
 }
 
-.filter-selected {
-    color: hsl(220, 98%, 61%);
-}
+.filter-selected {color: hsl(220, 98%, 61%);}
 
 .main-tip {
     position: relative;
@@ -206,25 +201,18 @@ body {
     color: var(--text2);
     font-size: 14px;
     font-weight: 700;
-    transition: color 1s ease-out;
 }
 
-.footer {
-    margin-top: 2rem;
-}
+.footer {margin-top: 2rem;}
 
 .footer p {
     font-size: 12px;
     font-weight: 700;
     text-align: center;
     color: var(--text);
-    transition: color 1s ease-out;
 }
 
-.footer p a {
-    color: var(--text2);
-    transition: color 1s ease-out;
-}
+.footer p a {color: var(--text2);}
 
 @media screen and (min-width: 500px) {
     .header-dark {
@@ -256,6 +244,8 @@ body {
         width: 18px;
         visibility: hidden;
     }
+
+    .todo-item {cursor: move;}
     
     .todo-item:hover .todo-img {
         visibility: visible;
