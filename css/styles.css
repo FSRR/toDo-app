@@ -1,12 +1,8 @@
-/* body, header, main, article, footer, ul {
-    transition: all .1s ease-out; 
-} */
-
 .dark {
     --body:  hsl(235, 21%, 11%);
     --box-item: hsl(235, 24%, 19%);
     --drag-item: hsl(236, 21%, 14%);
-    --border: hsl(237, 14%, 26%);
+    --border: hsl(237, 8%, 48%);
     --text: hsl(234, 39%, 85%);
     --text2: hsl(233, 14%, 35%);
     --hover:  hsl(236, 33%, 92%);
@@ -17,7 +13,7 @@
     --body:  hsl(0, 0%, 98%);
     --box-item: hsl(0, 0%, 98%);
     --drag-item:hsl(0, 1%, 79%);
-    --border: hsl(236, 33%, 92%);
+    --border: hsl(234, 19%, 71%);
     --text: hsl(236, 9%, 61%);
     --text2: hsl(236, 9%, 61%);
     --hover:  hsl(235, 19%, 35%);
@@ -82,7 +78,6 @@ body {
     padding: 1rem 0;
     background-color: var(--box-item);
     border-radius: 5px;
-    transition: background-color 1s ease-out;
 }
 
 .box-circle {
@@ -173,7 +168,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: 15px;
     padding: 1rem;
     color: var(--text2);
     font-weight: 400;
@@ -199,14 +194,14 @@ body {
     margin-top: 1rem;
     text-align: center;
     color: var(--text2);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 }
 
 .footer {margin-top: 2rem;}
 
 .footer p {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     text-align: center;
     color: var(--text);

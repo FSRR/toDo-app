@@ -130,5 +130,3 @@ const itemsLeft = () => {
     const itemLeft = Array.from(listToDo.children).filter(item => item.dataset.active).length
     document.getElementById('items-left').textContent = `${itemLeft} items left`
 }
-
-addEventListener('touchstart', console.log('hola'))
