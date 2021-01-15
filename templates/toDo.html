@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>Todo-App</title>
 </head>
 
 <body class="dark" id="body">
-    <header class="header header-dark" id="header-background"></header>
+    <header class="header header-dark" id="header-background">
+        <h1>Hola</h1>
+    </header>
     <main class="main">
         <header class="main-header">
-            <h1>todo</h1>
-            <img src="img/icon-sun.svg" alt="Light Theme" id="theme-mode">
+            <!-- <h1>to do of {{ data['user'] }}</h1> -->
+            <h1>to do</h1>
+            <img src="/static/img/icon-sun.svg" alt="Light Theme" id="theme-mode">
         </header>
         <article class="article">
             <div class="box-top">
@@ -24,7 +27,14 @@
             </div>
             <div class="box-bottom">
                 <ul class="list-todo" id="list-todo">
-                    <!-- <li class="todo-item" data-status="all, active" draggable="true">
+                    {% for item in data['tasks'] %}
+                    <li class="todo-item" id ={{ item["id"] }} data-status="{{ item["status"] }}"draggable="true">
+                        <div class="todo-circle"></div>
+                        <p class="todo-text">{{ item["task"] }}</p>
+                        <img src="/static/img/icon-cross.svg" alt="Drop item" class="todo-img">
+                    </li>
+                    {% endfor %}
+                    <!-- <li class="todo-item" data-status="all, active" data-all="all" data-active="active"  draggable="true">
                         <div class="todo-circle  todo-completed"></div>
                         <p class="todo-text  todo-completed">Estudiar Js</p>
                         <img src="img/icon-cross.svg" alt="Drop item" class="todo-img">
@@ -75,8 +85,9 @@
         </footer>
     </main>
 
-    <script src="js/crd-todo.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="/static/js/todo-properties.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="/static/js/create-todo.js"></script>
 </body>
 
 </html>
