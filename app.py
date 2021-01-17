@@ -16,11 +16,28 @@ app.secret_key = "gettherefast"
 def index():
     if 'data' in session:
         data = session['data']
-        print(data)
-        return render_template('toDo.html', data = data)
+        return render_template('index.html', data = data)
 
-    alert = request.args.get('alert')
+    alert = request.args.get('user')
     return render_template('index.html', alert = alert)
+
+
+@app.route('/login')
+def login():
+    alert = request.args.get('alert')
+    return render_template('login.html', alert = alert)
+
+
+@app.route('/signin')
+def signin():
+    alert = request.args.get('alert')
+    return render_template('register.html', alert = alert)
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 
 @app.route('/validate', methods = ['POST'])
@@ -33,11 +50,11 @@ def validate():
     data = controller.getData(user)
     if data:
         session['data'] = data
-
-    alert = 'Usuario no registrado'
-    return redirect(url_for('index', alert = alert))
+        return redirect(url_for('index'))
+    else:
+        alert = 'Usuario no encontrado'
+        return redirect(url_for('login', alert = alert))
         
-
 
 @app.route('/register', methods = ['POST', 'GET'])
 def register(): 
@@ -51,9 +68,12 @@ def register():
 
         controller = UserController()
         data = controller.registerUser(user)
-        session['data'] = data
-        print(data)
-        return redirect(url_for('index'))
+        if data:
+            session['data'] = data
+            return redirect(url_for('index'))
+        else:
+            alert = 'Este usuario ya existe'
+            return redirect(url_for('signin', alert = alert))
 
 
 @app.route('/sendData', methods = ['POST'])
@@ -66,7 +86,11 @@ def sendData():
     controller = UserController()
     response = controller.send(user)
 
-    return jsonify(response)
+    if response:
+        return jsonify(response)
+
+    alert = 'No se pudo guardar los datos'
+    return jsonify(alert)
 
 
 if __name__ == '__main__':

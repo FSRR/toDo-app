@@ -1,4 +1,5 @@
 from entity import *
+from connection import *
 import pickle
 import json
 
@@ -7,63 +8,62 @@ class UserDao:
         pass
 
     def getUser(self, user):
-        try:
-            with open('files/users.json', 'r') as data:
-                if data.read():
-                    users = json.loads(data.read())
-                    
-                    for u in users:
-                        if user.name == u['user'] and user.password == u['password']:
-                            print('Datos obtenidos')
-                            return u
-                else:
-                    return None
-
-        except Exception as e:
-            print(e)
+        connection = Connection()
+        users = connection.myConnection()
+        if users:
+            for u in users:
+                    if user.name == u['user'] and user.password == u['password']:
+                        print('Datos obtenidos')
+                        return u
+        
+        return None
 
     def updateData(self, user):
-        try:
-            users = None
-            with open('files/users.json', 'r') as data:
-                users = json.loads(data.read())
+        connection = Connection()
+        users = connection.myConnection()
+        if users:
+            try:
+                with open('files/users.json', 'w') as data:
+                    for u in users:
+                        if u['id'] == int(user.id):
+                            u['tasks'] = user.tasks
+                            break
 
-            with open('files/users.json', 'w') as data:
-                for u in users:
-                    if u['id'] == int(user.id):
-                        u['tasks'] = user.tasks
-                        break
-
-                data.write(json.dumps(users, indent=4))
-                print('Datos guardados')
-                return user.tasks
-
-        except Exception as e:
-            print(e)
-            return 'No se pudieron guardar los datos'
+                    data.write(json.dumps(users, indent=4))
+                    print('Datos guardados')
+                    return user.tasks
+            except Exception as e:
+                print(e)
+                print('No se pudieron guardar los datos')
+                return None
+        
+        return users
 
     def register(self, user):
-        try:
+        connection = Connection()
+        users = connection.myConnection()
+        print(users)
+        user.id = 0
+        user.tasks = []
+        ids = []
+        if users:
+            for u in users:
+                if user.name == u['user'] and user.password == u['password']:
+                    return None
+                ids.append(u['id'])
+            user.id = max(ids) + 1
+        else:
             users = []
-            with open('files/users.json', 'r+') as data:
-                user.id = 0
-                user.tasks = []
-                if data.read():
-                    users = json.loads(data.read())
 
-                    ids = []
-                    for u in users:
-                        ids.append(u['id'])
-                    user.id = max(ids) + 1
+        newUser = {
+            "id": user.id,
+            "user": user.name,
+            "email": user.email,
+            "password": user.password,
+            "tasks": user.tasks
+        }
 
-                newUser = {
-                    "id": user.id,
-                    "user": user.name,
-                    "email": user.email,
-                    "password": user.password,
-                    "tasks": user.tasks
-                }
-
+        try:
             with open('files/users.json', 'w') as data:
                 users.append(newUser)
                 data.write(json.dumps(users, indent=4))
@@ -73,4 +73,6 @@ class UserDao:
 
         except Exception as e:
             print(e)
-            return 'No se pudo registrar el usuario'
+            print('No se pudo registrar el usuario')
+            return None
+            

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    {% if alert %}
+    <p>{{ alert }}</p>
+    {% endif %}
+    <form action="/validate" method="POST">
+        <input type="text" placeholder="Nombre de usuario" name="userName">
+        <input type="password" placeholder="Contraseña" name="userPass">
+        <button>Siguiente</button>
+    </form>
+
+    <a href="/register">Sign in</a>
+</body>
+</html>

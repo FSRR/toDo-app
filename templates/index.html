@@ -1,21 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Todo-App</title>
 </head>
-<body>
-    <h1>Login</h1>
-    {% if alert %}
-    <p>{{ alert }}</p>
-    {% endif %}
-    <form action="/validate" method="POST">
-        <input type="text" placeholder="Usuario" name="userName">
-        <input type="password" placeholder="Contraseña" name="userPass">
-        <button>Siguiente</button>
-    </form>
 
-    <a href="/register">Sign in</a>
+<body class="dark" id="body">
+    <header class="header header-dark" id="header-background">
+        {% if 'data' in session %}
+            <h1>Hola {{ data['user'] }}</h1>
+            <p><a href="/logout">Log out</a></p>
+        {% else %}
+            <h1>Hola Invitado</h1>
+            <ul>
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/signin">Sign in</a></li>
+            </ul>
+            {% if alert %}
+            <p>{{ alert }}</p>
+            {% endif %}
+        {% endif %}
+    </header>
+    <main class="main">
+        <header class="main-header">
+            <h2>to do</h2>
+            <img src="/static/img/icon-sun.svg" alt="Light Theme" id="theme-mode">
+        </header>
+        <div class="article">
+            <div class="box-top">
+                <div class="box-circle"></div>
+                <input type="text" placeholder="Create a new todo" class="box-input" id="new-todo">
+            </div>
+            <div class="box-bottom">
+                {% if 'data' in session%}
+                <ul class="list-todo" id="list-todo" data-user={{ data['id'] }}>
+                    {% if data['tasks'] %}
+                    {% for item in data['tasks'] %}
+                    <li class="todo-item" id ={{ item['id'] }} data-status="{{ item['status'] }}" draggable="true">
+                        {% if item['status'] == 'completed' %}
+                        <div class="todo-circle todo-{{ item['status'] }}"></div>
+                        <p class="todo-text todo-{{ item['status'] }}">{{ item["task"] }}</p>
+                        {% else %}
+                        <div class="todo-circle"></div>
+                        <p class="todo-text">{{ item["task"] }}</p>
+                        {% endif %}
+                        <img src="/static/img/icon-cross.svg" alt="Drop item" class="todo-img">
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                {% else %}
+                <ul class="list-todo" id="list-todo" data-user="None">
+
+                </ul>
+                {% endif %}
+                <div class="options">
+                    <p id="items-left">0 items left</p>
+                    <div id="clean-completed">Clear Completed</div>
+                </div>
+                <div class="filter" id="filter">
+                    <div class="filter-selected" data-status="all">All</div>
+                    <div class="filter-hover" data-status="active">Active</div>
+                    <div class="filter-hover" data-status="completed">Completed</div>
+                </div>
+            </div>
+        </div>
+        <p class="main-tip">Drag and drop to reorder list</p>
+        <input type="button" value="Save" class="save-data" id="save-data">
+        <footer class="footer">
+            <p>
+                Challenge by <a href="https://www.frontendmentor.io/" target="_blank">Frontend Mentor</a>. Coded by <a
+                    href="https://github.com/FSRR" target="_blank">FSRR</a>
+            </p>
+        </footer>
+    </main>
+
+    <script src="/static/js/todo-properties.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="/static/js/create-todo.js"></script>
 </body>
+
 </html>

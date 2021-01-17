@@ -18,15 +18,18 @@ if(saveData) {
             tasks: changes
         }
 
-        fetch('/sendData', {
-            method: 'POST',
-            body: JSON.stringify(data, null, 2),
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(res => console.log(res))
+        if(data.id !== "None") {
+            fetch('/sendData', {
+                method: 'POST',
+                body: JSON.stringify(data, null, 2),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            .then(res => res.json())
+            .then(res => console.log(res))
+        } else alert('Iniciar sesión para guardar los datos')
+
     })
 }
 
