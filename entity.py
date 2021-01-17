@@ -1,9 +1,14 @@
 class User:
     def __init__(self):
+        self.__id = None
         self.__name= None
         self.__email = None
         self.__password = None
-        self.__toDo = None
+        self.__tasks = None
+
+    @property
+    def id(self):
+        return self.__id
 
     @property
     def name(self):
@@ -18,8 +23,12 @@ class User:
         return self.__password
 
     @property
-    def toDo(self):
-        return self.__toDo
+    def task(self):
+        return self.__tasks
+
+    @id.setter
+    def id(self, id):
+        self.__id = id
 
     @name.setter
     def name(self, name):
@@ -33,6 +42,6 @@ class User:
     def password(self, password):
         self.__password = password
 
-    @toDo.setter
-    def toDo(self, toDo):
-        self.__toDo = toDo
+    @task.setter
+    def task(self, task):
+        self.__tasks = task

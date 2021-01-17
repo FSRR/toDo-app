@@ -1,5 +1,7 @@
 const newTodo = document.getElementById('new-todo')
-let id = parseInt(listToDo.firstElementChild.id.slice(5)) + 1
+let id
+if(listToDo.firstElementChild) id = parseInt(listToDo.firstElementChild.id.slice(5)) + 1
+else id = 0
 console.log(id);
 
 if(newTodo) {

@@ -1,4 +1,34 @@
 const listToDo = document.getElementById('list-todo')
+const saveData = document.getElementById('save-data')
+
+if(saveData) {
+    saveData.addEventListener('click', () => {
+        let changes = []
+        for(const item of Array.from(listToDo.children)) {
+            const data = {
+                id: item.id,
+                task: item.textContent.trim(),
+                status: item.dataset.status
+            }
+            changes.push(data)
+        }
+
+        const data = {
+            id: listToDo.dataset.user,
+            tasks: changes
+        }
+
+        fetch('/sendData', {
+            method: 'POST',
+            body: JSON.stringify(data, null, 2),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+    })
+}
 
 // Funciones de cada to-Do
 const dragToDo = item => {

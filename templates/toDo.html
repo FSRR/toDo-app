@@ -12,7 +12,7 @@
 
 <body class="dark" id="body">
     <header class="header header-dark" id="header-background">
-        <h1>Hola</h1>
+        <h1>Hola {{ data['user'] }}</h1>
     </header>
     <main class="main">
         <header class="main-header">
@@ -20,20 +20,22 @@
             <h1>to do</h1>
             <img src="/static/img/icon-sun.svg" alt="Light Theme" id="theme-mode">
         </header>
-        <article class="article">
+        <div class="article">
             <div class="box-top">
                 <div class="box-circle"></div>
                 <input type="text" placeholder="Create a new todo" class="box-input" id="new-todo">
             </div>
             <div class="box-bottom">
-                <ul class="list-todo" id="list-todo">
+                <ul class="list-todo" id="list-todo" data-user={{ data['id'] }}>
+                    {% if data['tasks'] %}
                     {% for item in data['tasks'] %}
-                    <li class="todo-item" id ={{ item["id"] }} data-status="{{ item["status"] }}"draggable="true">
+                    <li class="todo-item" id ={{ item['id'] }} data-status={{ item['status'] }} draggable="true">
                         <div class="todo-circle"></div>
                         <p class="todo-text">{{ item["task"] }}</p>
                         <img src="/static/img/icon-cross.svg" alt="Drop item" class="todo-img">
                     </li>
                     {% endfor %}
+                    {% endif %}
                     <!-- <li class="todo-item" data-status="all, active" data-all="all" data-active="active"  draggable="true">
                         <div class="todo-circle  todo-completed"></div>
                         <p class="todo-text  todo-completed">Estudiar Js</p>
@@ -75,8 +77,9 @@
                     <div class="filter-hover" data-status="completed">Completed</div>
                 </div>
             </div>
-        </article>
+        </div>
         <p class="main-tip">Drag and drop to reorder list</p>
+        <input type="button" value="Save" class="save-data" id="save-data">
         <footer class="footer">
             <p>
                 Challenge by <a href="https://www.frontendmentor.io/" target="_blank">Frontend Mentor</a>. Coded by <a
