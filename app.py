@@ -66,8 +66,13 @@ def register():
         user.email = request.form['userEmail']
         user.password = request.form['userPass']
 
-        controller = UserController()
-        data = controller.registerUser(user)
+
+        if not (user.name and user.email and user.password):
+            print('si')
+            controller = UserController()
+            data = controller.registerUser(user)
+            alert = 'Rellena todos los campos'
+            return redirect(url_for('signin', alert = alert))
         if data:
             session['data'] = data
             return redirect(url_for('index'))

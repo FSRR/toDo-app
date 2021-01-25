@@ -30,31 +30,64 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background-color 1s ease-out;
 }
 
 .header {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--box-item);
+    border-top: 3px solid var(--text);
+}
+
+
+.logout {text-align: center;}
+.logout a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.log-sign {
+    display: flex;
+    justify-content: center;
+    gap: 1.25em;
+    list-style-type: none;
+    padding: 0;
+}
+
+.logout i, .login i, .signin i {
+    color: var(--text);
+    margin-right: 5px;
+}
+
+.login a, .signin a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.banner {
     align-self: stretch;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     height: 30vh;
 }
 
-.header-dark {background-image: url(/static/img/bg-mobile-dark.jpg);}
+.banner-dark {background-image: url(/static/img/bg-mobile-dark.jpg);}
 
-.header-light {background-image: url(/static/img/bg-mobile-light.jpg);}
+.banner-light {background-image: url(/static/img/bg-mobile-light.jpg);}
 
 .main {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    max-width: 550px;
-    min-width: 350px;
-    padding: 3rem 1.5rem 1rem;
-    background-color: transparent;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    max-width: 550px;
+    min-height: 80vh;
+    padding: 0 1.5rem 1rem;
+    background-color: transparent;
+    box-sizing: border-box;
 }
 
 .main-header {
@@ -73,7 +106,15 @@ body {
 
 .main-header img {cursor: pointer;}
 
-.article {padding-top: 1.7rem;}
+.article {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+
+    justify-content: center;
+}
 
 .box-top{
     display: flex;
@@ -95,7 +136,7 @@ body {
     margin-left: 1rem;
 }
 
-.box-input {
+.box-input, .form-input {
     width: 100%;
     border: none;
     background-color: transparent;
@@ -204,7 +245,7 @@ input:focus {outline: none;}
     font-weight: 700;
 }
 
-.save-data {
+.save-data, .send-form {
     align-self: center;
     border: none;
     outline: none;
@@ -212,6 +253,43 @@ input:focus {outline: none;}
     color: var(--text);
     background-color: var(--button);
     padding: 10px 35px;
+}
+
+/* LOGIN STYLES */
+
+.logsign-banner {
+    height: 20vh;
+}
+
+.logsign-title {
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.logsign-alert {
+    color: var(--border);
+    margin-top: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-input {
+    padding: 10px 5px;
+    border: 2px solid var(--border);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.send-form {margin-top: 15px;}
+
+.link-signin {
+    align-self: center;
+    color: var(--border);
+    margin-top: 15px;
 }
 
 .footer {margin-top: 2rem;}
@@ -225,17 +303,35 @@ input:focus {outline: none;}
 
 .footer p a {color: var(--text2);}
 
-@media screen and (min-width: 500px) {
-    .header-dark {
+@media screen and (min-width: 600px) {
+
+    .header {
+        position: relative;
+        width: max-content;
+        background: none;
+        border: none;
+        margin-top: 8px;
+        transform: translateX(100%);
+    }
+    
+    .logout a:hover, .login a:hover, .signin a:hover {text-decoration: underline;}
+
+    .banner {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .banner-dark {
         background-image: url(/static/img/bg-desktop-dark.jpg);
     }
     
-    .header-light {
+    .banner-light {
         background-image: url(/static/img/bg-desktop-light.jpg);
     }
 
     .main {
-        top: 30px;
+        top: 80px;
     }
 
     .main-header h2 {
@@ -289,4 +385,13 @@ input:focus {outline: none;}
     }
 
     .save-data {cursor: pointer;}
+}
+
+@media screen and (min-width: 950px) {
+    .header {
+        align-self: end;
+        margin-right: 50px;
+        margin-top: 8px;
+        transform: none;
+    }
 }

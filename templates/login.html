@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    {% if alert %}
-    <p>{{ alert }}</p>
-    {% endif %}
-    <form action="/validate" method="POST">
-        <input type="text" placeholder="Nombre de usuario" name="userName">
-        <input type="password" placeholder="Contraseña" name="userPass">
-        <button>Siguiente</button>
-    </form>
+{% extends "base.html" %}
 
-    <a href="/register">Sign in</a>
-</body>
-</html>
+{% block header %}
+<div class="banner logsign-banner banner-dark" id="banner-background">
+        
+</div>
+{% endblock %}
+
+{% block content %}
+    <h1 class="logsign-title">Login</h1>
+    {% if alert %}
+    <p class="logsign-alert">{{ alert }}</p>
+    {% endif %}
+    <form action="/validate" method="POST" class="form">
+        <input type="text" placeholder="Nombre de usuario" name="userName" autofocus required class="form-input">
+        <input type="password" placeholder="Contraseña" name="userPass" required class="form-input">
+        <button class="send-form">Log in</button>
+    </form>
+        
+    <a href="/register" class="link-signin">Sign in</a>
+
+{% endblock %}

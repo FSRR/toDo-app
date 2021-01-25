@@ -1,0 +1,16 @@
+[
+    {
+        "id": 0,
+        "user": "Sebastian",
+        "email": "sebastian@gmail.com",
+        "password": "gettherefast",
+        "tasks": []
+    },
+    {
+        "id": 1,
+        "user": "",
+        "email": "",
+        "password": "",
+        "tasks": []
+    }
+]
