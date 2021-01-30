@@ -8,6 +8,7 @@
     --hover:  hsl(236, 33%, 92%);
     --shadow:  hsl(233, 18%, 10%);
     --button: hsl(245, 89%, 39%);
+    --icons: hsl(234, 39%, 85%);
 }
 
 .light {
@@ -20,6 +21,7 @@
     --hover:  hsl(235, 19%, 35%);
     --shadow: hsl(236, 33%, 92%);
     --button: hsl(115, 60%, 31%);
+    --icons: hsl(0, 0%, 98%);
 }
 
 body {
@@ -72,6 +74,8 @@ body {
     background-repeat: no-repeat;
     height: 30vh;
 }
+
+.logsign-banner {height: 22vh;}
 
 .banner-dark {background-image: url(/static/img/bg-mobile-dark.jpg);}
 
@@ -250,16 +254,12 @@ input:focus {outline: none;}
     border: none;
     outline: none;
     border-radius: 5px;
-    color: var(--text);
+    color: #fff;
     background-color: var(--button);
     padding: 10px 35px;
 }
 
 /* LOGIN STYLES */
-
-.logsign-banner {
-    height: 20vh;
-}
 
 .logsign-title {
     color: var(--text);
@@ -316,10 +316,11 @@ input:focus {outline: none;}
     
     .logout a:hover, .login a:hover, .signin a:hover {text-decoration: underline;}
 
-    .banner {
+    .banner, .logsign-banner {
         position: absolute;
         top: 0;
         width: 100%;
+        height: 25vh;
     }
 
     .banner-dark {
@@ -328,6 +329,12 @@ input:focus {outline: none;}
     
     .banner-light {
         background-image: url(/static/img/bg-desktop-light.jpg);
+    }
+
+    .logout a, .logout i,
+    .login i, .signin i,
+    .login a, .signin a {
+        color: var(--icons);
     }
 
     .main {

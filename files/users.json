@@ -8,9 +8,9 @@
     },
     {
         "id": 1,
-        "user": "",
-        "email": "",
-        "password": "",
+        "user": "maria",
+        "email": "retz-rios@hotmail.com",
+        "password": "manona123",
         "tasks": []
     }
 ]
