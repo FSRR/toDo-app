@@ -12,12 +12,14 @@
 <body class="dark" id="body">
     <header class="header">
         {% if 'data' in session %}
-            <p class="logout">
+            <p class="logout" id="logout">
                 <i class="fas fa-sign-out-alt"></i>
                 <a href="/logout">Log out</a>
             </p>
         {% else %}
-            <ul class="log-sign">
+            <ul class="log-sign-home" id="log-sign-home">
+                {% block list %}
+                {% endblock %}
                 <li class="login">
                     <i class="fas fa-user"></i>
                     <a href="/login">Log in</a>
@@ -34,7 +36,17 @@
     <main class="main">
         <header class="main-header">
             <h2>to do</h2>
-            <img src="/static/img/icon-sun.svg" alt="Light Theme" id="theme-mode">
+            {% if theme  %}
+            <label for="theme-checkbox" id="theme-mode"">
+                <img src="/static/img/icon-moon.svg" alt="Dark Theme">
+            </label>
+            <input type="checkbox" name="theme" checked id="theme-checkbox" class="theme-checkbox">
+            {% else %}
+            <label for="theme-checkbox" id="theme-mode"">
+                <img src="/static/img/icon-sun.svg" alt="Light Theme">
+            </label>
+            <input type="checkbox" name="theme" id="theme-checkbox" class="theme-checkbox">
+            {% endif %}
         </header>
         <div class="article">
             {% block content %}

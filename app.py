@@ -14,24 +14,33 @@ app.secret_key = "gettherefast"
 
 @app.route('/')
 def index():
+    theme = True
+    if 'theme' in session:
+        theme = session['theme']
     if 'data' in session:
         data = session['data']
-        return render_template('index.html', data = data)
-
+        return render_template('index.html', data = data, theme=theme)
+    
     alert = request.args.get('user')
-    return render_template('index.html', alert = alert)
+    return render_template('index.html', alert = alert, theme=theme)
 
 
 @app.route('/login')
 def login():
+    theme = 'True'
+    if 'theme' in session:
+        theme = session['theme']
     alert = request.args.get('alert')
-    return render_template('login.html', alert = alert)
+    return render_template('login.html', alert = alert, theme = theme)
 
 
 @app.route('/signin')
 def signin():
+    theme = 'True'
+    if 'theme' in session:
+        theme = session['theme']
     alert = request.args.get('alert')
-    return render_template('register.html', alert = alert)
+    return render_template('register.html', alert = alert, theme = theme)
 
 
 @app.route('/logout')
@@ -96,6 +105,16 @@ def sendData():
 
     alert = 'No se pudo guardar los datos'
     return jsonify(alert)
+
+
+@app.route('/changeTheme', methods=['POST'])
+def changeTheme():
+    theme = request.get_json()
+    session['theme'] = theme
+    print('----------------')
+    print(theme)
+
+    return jsonify(theme)
 
 
 if __name__ == '__main__':

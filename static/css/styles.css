@@ -1,4 +1,4 @@
-.dark {
+:root {
     --body:  hsl(235, 21%, 11%);
     --box-item: hsl(235, 24%, 19%);
     --drag-item: hsl(236, 21%, 14%);
@@ -9,19 +9,6 @@
     --shadow:  hsl(233, 18%, 10%);
     --button: hsl(245, 89%, 39%);
     --icons: hsl(234, 39%, 85%);
-}
-
-.light {
-    --body:  hsl(0, 0%, 98%);
-    --box-item: hsl(0, 0%, 98%);
-    --drag-item:hsl(0, 1%, 79%);
-    --border: hsl(234, 19%, 71%);
-    --text: hsl(236, 9%, 61%);
-    --text2: hsl(236, 9%, 61%);
-    --hover:  hsl(235, 19%, 35%);
-    --shadow: hsl(236, 33%, 92%);
-    --button: hsl(115, 60%, 31%);
-    --icons: hsl(0, 0%, 98%);
 }
 
 body {
@@ -50,7 +37,7 @@ body {
     text-decoration: none;
 }
 
-.log-sign {
+.log-sign-home {
     display: flex;
     justify-content: center;
     gap: 1.25em;
@@ -58,12 +45,12 @@ body {
     padding: 0;
 }
 
-.logout i, .login i, .signin i {
+.logout i, .login i, .signin i, .home i {
     color: var(--text);
     margin-right: 5px;
 }
 
-.login a, .signin a {
+.login a, .signin a, .home a {
     color: var(--text);
     text-decoration: none;
 }
@@ -106,6 +93,10 @@ body {
     text-transform: uppercase;
     letter-spacing: 10px;
     margin: 0;
+}
+
+.theme-checkbox {
+    display: none;
 }
 
 .main-header img {cursor: pointer;}
@@ -313,6 +304,9 @@ input:focus {outline: none;}
         margin-top: 8px;
         transform: translateX(100%);
     }
+
+    .header-home {transform: translateX(-50%);}
+    .header-logout {transform: translateX(250%);}
     
     .logout a:hover, .login a:hover, .signin a:hover {text-decoration: underline;}
 
@@ -331,9 +325,10 @@ input:focus {outline: none;}
         background-image: url(/static/img/bg-desktop-light.jpg);
     }
 
-    .logout a, .logout i,
-    .login i, .signin i,
-    .login a, .signin a {
+    .logout i, .logout a,
+    .login i, .login a,
+    .signin i, .signin a,
+    .home i, .home a {
         color: var(--icons);
     }
 
